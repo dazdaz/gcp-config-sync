@@ -16,4 +16,4 @@ gcloud beta container fleet config-management apply --membership=<clustername1> 
 kubectl logs -l "component=config-management-operator" -n config-management-system
 kubectl logs -l "app=reconciler-manager" -n config-management-system
 # Useful for debugging Git issues or checking for successful execution
-kubectl logs -l "app=reconciler" -n config-management-system
+kubectl logs -l "app=reconciler" -n config-management-system --since=60m --all-containers
