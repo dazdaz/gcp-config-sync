@@ -1,5 +1,6 @@
 # Setup Config Sync using Google Cloud Source Repo service
 
+# ~/.ssh/config
 Host source.developers.google.com
     HostName source.developers.google.com
     User <user>@<name>.<domain>.com
