@@ -1,5 +1,18 @@
 # Setup Config Sync using Google Cloud Source Repo service
 
+kubectl create ns config-management-system
+# Add private key
+kubectl create secret generic git-creds --namespace=config-management-system --from-file=ssh=/Users/<myuser>/.ssh/configsync-repokey
+
+export PROJECT_ID=<projectname>
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format=json | jq -r .projectNumber)
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+  --role roles/source.reader
+
+gcloud projects add-iam-policy-binding <project> --member serviceAccount:888888888888-compute@developer.gserviceaccount.com --role roles/source.reader
+
 # ~/.ssh/config
 Host source.developers.google.com
     HostName source.developers.google.com
