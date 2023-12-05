@@ -1,5 +1,20 @@
 # Setup Config Sync using Google Cloud Source Repo service
 
+### For monitoring
+gcloud iam service-accounts create monitoring \
+    --description="service account for monitoring" \
+    --display-name="monitoring"
+
+gcloud iam service-accounts add-iam-policy-binding \
+    monitoring@<project_name>.iam.gserviceaccount.com \
+    --member="serviceAccount:monitoring@<project_name>.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountUser"
+
+gcloud iam service-accounts add-iam-policy-binding \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<project_name>.svc.id.goog[config-management-monitoring/default]" \
+    monitoring@<project_name>.iam.gserviceaccount.com
+
 kubectl create ns config-management-system
 # Add private key
 kubectl create secret generic git-creds --namespace=config-management-system --from-file=ssh=/Users/<myuser>/.ssh/configsync-repokey
