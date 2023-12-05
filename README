@@ -20,6 +20,7 @@ gcloud source repos list
 git clone ssh://<user>@<user>.<host>.com@source.developers.google.com:2022/p/<project>/r/<repo>
 
 gcloud beta container fleet config-management apply --membership=<clustername1> --config=apply-spec.yaml --project=<project>
+gcloud beta container fleet config-management status
 
 kubectl logs -l "component=config-management-operator" -n config-management-system
 kubectl logs -l "app=reconciler-manager" -n config-management-system
